@@ -1,1 +1,1 @@
-[]
+[{"password":"bubba","name":"root","id":"0","friends":[["1","Nick"],["2","Tal"],["3","Diane"],["4","That kid who left"]]},{"password":"gooby","name":"nick","id":"nickp","friends":[["1","Nick"],["2","Tal"],["3","Diane"],["4","That kid who left"]]},{"password":"abc","name":"Nick","id":"1","friends":[]},{"password":"abc","name":"Tal","id":"2","friends":[]}]

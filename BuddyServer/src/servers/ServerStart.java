@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 import java.util.HashMap;
 
 import org.json.simple.JSONArray;
@@ -21,8 +25,8 @@ public class ServerStart {
 	private static JSONArray userData;
 
 	public static void main(String args[]){
-
 		
+		//writeFile("data.json");
 		
 		//for each person link their ID to an object containing their info
 		data= new HashMap<String,Info>();
@@ -40,7 +44,7 @@ public class ServerStart {
 	private static void startServers(){
 
 		//starts the server responsible for accepting packets from registered users
-		Thread phoneServer = new Thread(new PhoneServer(data,5634));
+		Thread phoneServer = new Thread(new PhoneServer(data,5634,userData));
 		phoneServer.start();
 
 		//start the server responsible for sending out requests
@@ -73,6 +77,7 @@ public class ServerStart {
 				JSONObject entry =(JSONObject) o1;
 				String id = (String) entry.get("id");
 				String name = (String) entry.get("name");
+				String password = (String) entry.get("password");
 
 				JSONArray friends = (JSONArray) entry.get("friends");
 
@@ -88,7 +93,7 @@ public class ServerStart {
 
 				}
 
-				Info user = new Info(null,name,id,friendsList);
+				Info user = new Info(null,name,id,friendsList,password);
 				data.put(id, user);
 			}
 			
@@ -121,6 +126,7 @@ public class ServerStart {
 		JSONObject user = new JSONObject();
 		user.put("id", "0");
 		user.put("name", "root");
+		user.put("password", "bubba");
 
 		String [][] friends = {{"1","Nick"},{"2","Tal"},{"3","Diane"},{"4","That kid who left"}};
 		JSONArray friendsJSON = new JSONArray();
@@ -150,4 +156,5 @@ public class ServerStart {
 			e.printStackTrace();
 		}
 	}
+	
 }

@@ -24,6 +24,7 @@ public class Info {
 	//name and ID of the user
 	private String name;
 	private String id;
+	private String password;
 	
 	/**
 	 * Create a user in the database with an ip and name
@@ -32,7 +33,7 @@ public class Info {
 	 * @param name
 	 * @param id
 	 */
-	public Info(String lastKnownIp,String name,String id,HashMap<String,String> friends){
+	public Info(String lastKnownIp,String name,String id,HashMap<String,String> friends,String password){
 		
 		latitude = 1000;
 		longitude = 1000;
@@ -42,8 +43,14 @@ public class Info {
 		this.lastKnownIp=lastKnownIp;
 		this.name=name;
 		this.id=id;
+		this.password=password;
 	}
 	
+	
+	public String getPassword(){
+		
+		return password;
+	}
 	public long getTime(){
 		
 		return lastTime;
@@ -74,6 +81,11 @@ public class Info {
 	public HashMap<String,Double> getTethers(){
 		
 		return myTethers;
+	}
+	
+	public HashMap<String,String> getFriends(){
+		
+		return friends;
 	}
 	
 	/**
@@ -162,7 +174,7 @@ public class Info {
 	public String toString(){
 		
 		String toRet="";
-		toRet+="{"+"coords: "+ latitude+", "+longitude + " Connections: "+myTethers.toString() + " Friends: "+friends.toString()+" IP: "+ lastKnownIp + " name: "+name + " id: "+id+"}";
+		toRet+="{"+ "Name: "+name + " id: "+id + " Password:" + password +" coords: "+ latitude+", "+longitude + " Connections: "+myTethers.toString() + " Friends: "+friends.toString()+" IP: "+ lastKnownIp + "}";
 		return toRet;
 	
 	}

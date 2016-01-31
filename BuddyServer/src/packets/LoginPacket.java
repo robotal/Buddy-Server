@@ -14,12 +14,19 @@ public class LoginPacket extends Packet {
 	 * @param name
 	 * @param packetType
 	 */
-	public LoginPacket(String ip, int port, String id, String name) {
+	
+	String password;
+	
+	public LoginPacket(String ip, int port, String id, String name,String password) {
 		
 		
 		super(ip, port, id, name, Packet.LOGIN_PACKET);
-		
+		this.password=password;
 		
 	}
-
+	
+	public String getPassword(){
+		
+		return password;
+	}
 }

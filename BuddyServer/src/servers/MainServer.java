@@ -52,7 +52,7 @@ public class MainServer implements Runnable{
 
 							String targetIp;
 
-							if(targetInfo!=null && (targetIp=targetInfo.getLastKnownIp())!=null){
+							if(targetInfo!=null && (targetIp=targetInfo.getLastKnownIp())!=null || !(next.getIp().equals(PhoneServer.HOST_IP)) && (targetIp=next.getIp())==next.getIp()){
 
 								//encode the output into a buffer
 								byte buf[];

@@ -11,6 +11,9 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import data.Info;
 import packets.*;
 
@@ -25,12 +28,28 @@ public class PhoneServer implements Runnable{
 
 	private int MAX_UDP_DATAGRAM_LEN=4096;
 	private int UDP_SERVER_PORT;
+	
+	private JSONArray users;
+	
+	public static String HOST_IP;
+	
 	private HashMap<String,Info> data;
 
-	public PhoneServer(HashMap<String,Info> data,int port){
+	public PhoneServer(HashMap<String,Info> data,int port,JSONArray users){
 
 		this.data=data;
 		this.UDP_SERVER_PORT=port;
+		this.users=users;
+		
+		try {
+			HOST_IP = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 
@@ -71,7 +90,7 @@ public class PhoneServer implements Runnable{
 					Packet incoming = receivePacket (socket,packet,incomingPacket);
 
 
-					new Thread(new PacketHandler(incoming,data)).start();
+					new Thread(new PacketHandler(incoming,data,users)).start();
 
 				}
 

@@ -34,7 +34,7 @@ public class ClientServer implements Runnable {
 			try {
 
 				//wait 5 seconds before each iteration
-				Thread.sleep(/*5*/1000);
+				Thread.sleep(5000);
 
 				System.out.println("WOKE UP FROM SLUMBER\n");
 
